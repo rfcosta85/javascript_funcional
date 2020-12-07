@@ -1,0 +1,25 @@
+function funcionarOuNao(valor, chanceErro)
+{
+
+    return new Promise((resolve, reject) => {
+
+        if(Math.random() < chanceErro)
+        {
+
+            reject('Ocorreu um erro!')
+
+        }else 
+        {
+
+            resolve(valor)
+
+        }
+
+    })
+
+}
+
+funcionarOuNao('Testando....', 0.5) // o 0.5 aqui representa 50% de chances de acerto ou erro
+    .then(v => console.log(`Valor: ${v}`))
+    .catch(err => console.log(`Erro: ${err}`)) // Tratamento de erro
+    .then(() => console.log('Fim!'))
