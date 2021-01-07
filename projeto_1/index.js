@@ -5,6 +5,6 @@ const fn = require('./funcoes')
 
 const caminho = path.join(__dirname, '..', 'dados','legendas') // dirname nos informa a pasta atual, ... para sairmos desse diretorio, legendas para entrarmos na pasta legendas
 
-const arquivos = fn.lerDiretorio(caminho)
+fn.lerDiretorio(caminho)
+    .then(console.log)
 
-console.log(arquivos)
