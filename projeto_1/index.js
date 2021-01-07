@@ -9,5 +9,7 @@ fn.lerDiretorio(caminho)
 
     .then(arquivos => fn.elementosTerminadosCom(arquivos, '.srt'))
     .then(arquivosSRT => fn.lerArquivos(arquivosSRT))
+    .then(conteudos => conteudos.join('\n')) // Aqui juntamos todos os arquivos em uma única String
+    .then(todoConteudo => todoConteudo.split('\n')) // Aqui iremos gerar a quebra de linha
     .then(console.log)
 
