@@ -12,4 +12,5 @@ fn.lerDiretorio(caminho)
     .then(conteudos => conteudos.join('\n')) // Aqui juntamos todos os arquivos em uma única String
     .then(todoConteudo => todoConteudo.split('\n')) // Aqui iremos gerar a quebra de linha
     .then(linhas => fn.removerSeVazio(linhas)) // Removendo os espaços vazios.
+    .then(linhas => fn.removerSeIncluir(linhas, '-->'))
     .then(console.log)
