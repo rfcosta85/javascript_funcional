@@ -95,6 +95,27 @@ function removerElementosSeApenasNumero(array)
     })
 }
 
+function removerSimbolos(simbolos)
+{
+
+    return function(array)
+    {
+
+        return array.map(el => {
+
+            let textoSemSimbolos = el
+            simbolos.forEach(simbolo => {
+
+                textoSemSimbolos = textoSemSimbolos.split(simbolo).join('') // Aqui nós pegamos cada símbolo excluímos e juntamos com o array resultante um espaço em branco
+
+            })
+
+            return textoSemSimbolos
+
+        })
+    }
+}
+
 module.exports = 
 {
 
@@ -104,6 +125,7 @@ module.exports =
     elementosTerminadosCom,
     removerElementosSeVazio,
     removerElementosSeIncluir,
-    removerElementosSeApenasNumero
+    removerElementosSeApenasNumero,
+    removerSimbolos
 
 } // Aqui estamos criando um atributo chamado lerDiretorio que aponta para a função ler diretório, o mesmo acontece com as demais funções. Esse método é conhecido como objetos literais.

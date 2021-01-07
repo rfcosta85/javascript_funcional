@@ -5,6 +5,11 @@ const fn = require('./funcoes')
 
 const caminho = path.join(__dirname, '..', 'dados','legendas') // dirname nos informa a pasta atual, ... para sairmos desse diretorio, legendas para entrarmos na pasta legendas
 
+const simbolos = [
+
+    '.', '?', '-', ',', '"', '♪', '_', '<i>', '</i>', '\r', '[, ]', '(', ')'
+]
+
 fn.lerDiretorio(caminho)
 
     .then(fn.elementosTerminadosCom('.srt'))
@@ -14,4 +19,5 @@ fn.lerDiretorio(caminho)
     .then(fn.removerElementosSeVazio) // Removendo os espaços vazios.
     .then(fn.removerElementosSeIncluir('-->'))
     .then(fn.removerElementosSeApenasNumero)
+    .then(fn.removerSimbolos(simbolos))
     .then(console.log)
