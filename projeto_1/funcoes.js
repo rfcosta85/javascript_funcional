@@ -60,12 +60,20 @@ function elementosTerminadosCom(array, padrao)
 
 } // Essa função irá retornar um array com todos os arquivos que atendam a condição determinada em padrão
 
+function removerSeVazio(array)
+{
+
+    return array.filter(el => el.trim()) // O método trim vai retirar os espaços em branco
+    
+}
+
 module.exports = 
 {
 
     lerDiretorio,
     lerArquivo,
     lerArquivos,
-    elementosTerminadosCom
+    elementosTerminadosCom,
+    removerSeVazio
 
 } // Aqui estamos criando um atributo chamado lerDiretorio que aponta para a função ler diretório, o mesmo acontece com as demais funções. Esse método é conhecido como objetos literais.
