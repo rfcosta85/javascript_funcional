@@ -7,11 +7,11 @@ const caminho = path.join(__dirname, '..', 'dados','legendas') // dirname nos in
 
 fn.lerDiretorio(caminho)
 
-    .then(arquivos => fn.elementosTerminadosCom(arquivos, '.srt'))
-    .then(arquivosSRT => fn.lerArquivos(arquivosSRT))
+    .then(fn.elementosTerminadosCom('.srt'))
+    .then(fn.lerArquivos)
     .then(conteudos => conteudos.join('\n')) // Aqui juntamos todos os arquivos em uma única String
     .then(todoConteudo => todoConteudo.split('\n')) // Aqui iremos gerar a quebra de linha
-    .then(linhas => fn.removerSeVazio(linhas)) // Removendo os espaços vazios.
-    .then(linhas => fn.removerSeIncluir(linhas, '-->'))
-    .then(linhas => fn.removerSeApenasNumero(linhas))
+    .then(fn.removerElementosSeVazio) // Removendo os espaços vazios.
+    .then(fn.removerElementosSeIncluir('-->'))
+    .then(fn.removerElementosSeApenasNumero)
     .then(console.log)

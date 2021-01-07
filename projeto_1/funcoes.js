@@ -53,28 +53,39 @@ function lerArquivos(caminhos) // recebemos um conjunto de caminhos, quando todo
 
 }
 
-function elementosTerminadosCom(array, padraoTextual)
+function elementosTerminadosCom(padraoTextual)
 {
 
-    return array.filter(el => el.endsWith(padraoTextual))
+    return function(array)
+    {
+
+        return array.filter(el => el.endsWith(padraoTextual))
+
+    }
+    
 
 } // Essa função irá retornar um array com todos os arquivos que atendam a condição determinada em padrão
 
-function removerSeVazio(array)
+function removerElementosSeVazio(array)
 {
 
     return array.filter(el => el.trim()) // O método trim vai retirar os espaços em branco
     
 }
 
-function removerSeIncluir(array, padraoTextual)
+function removerElementosSeIncluir(padraoTextual)
 {
 
-    return array.filter(el => !el.includes(padraoTextual)) // Se não incluir o padrão textual, manter o elemento no array final, caso contrário remova
+    return function(array) // refatorando... agora somente se tivermos um array é que ele fará o processamento para pegar o valor textual
+    {
 
+        return array.filter(el => !el.includes(padraoTextual)) // Se não incluir o padrão textual, manter o elemento no array final, caso contrário remova
+
+    }
+    
 }
 
-function removerSeApenasNumero(array)
+function removerElementosSeApenasNumero(array)
 {
 
     return array.filter(el => {
@@ -91,8 +102,8 @@ module.exports =
     lerArquivo,
     lerArquivos,
     elementosTerminadosCom,
-    removerSeVazio,
-    removerSeIncluir,
-    removerSeApenasNumero
+    removerElementosSeVazio,
+    removerElementosSeIncluir,
+    removerElementosSeApenasNumero
 
 } // Aqui estamos criando um atributo chamado lerDiretorio que aponta para a função ler diretório, o mesmo acontece com as demais funções. Esse método é conhecido como objetos literais.
