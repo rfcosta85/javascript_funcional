@@ -7,17 +7,24 @@ const caminho = path.join(__dirname, '..', 'dados','legendas') // dirname nos in
 
 const simbolos = [
 
-    '.', '?', '-', ',', '"', '♪', '_', '<i>', '</i>', '\r', '[, ]', '(', ')'
+    '.', '?', '-', ',', '"', '♪', '_', '<i>', '</i>', '\r', '[', ']', '(', ')'
 ]
 
-fn.lerDiretorio(caminho)
+function agruparPalavras()
+{
+    // reduce
+}
 
+fn.lerDiretorio(caminho)
     .then(fn.elementosTerminadosCom('.srt'))
     .then(fn.lerArquivos)
-    .then(conteudos => conteudos.join('\n')) // Aqui juntamos todos os arquivos em uma única String
-    .then(todoConteudo => todoConteudo.split('\n')) // Aqui iremos gerar a quebra de linha
+    .then(fn.MesclarElementos) 
+    .then(fn.separarTextoPor('\n'))
     .then(fn.removerElementosSeVazio) // Removendo os espaços vazios.
     .then(fn.removerElementosSeIncluir('-->'))
     .then(fn.removerElementosSeApenasNumero)
     .then(fn.removerSimbolos(simbolos))
+    .then(fn.MesclarElementos) 
+    .then(fn.separarTextoPor(' '))
+    .then(fn.removerElementosSeVazio)
     .then(console.log)
