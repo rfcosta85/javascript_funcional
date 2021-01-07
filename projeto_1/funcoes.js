@@ -1,6 +1,7 @@
 // Aqui teremos as funções que podem ser utilizadas em outros projetos no futuro
 
 const fs = require('fs')
+const { resolve } = require('path')
 const path = require('path')
 
 function lerDiretorio(caminho) // Responsável por ler um diretório
@@ -27,6 +28,31 @@ function lerDiretorio(caminho) // Responsável por ler um diretório
 
 }
 
+function lerArquivo(caminho) // Assíncrona para ler um arquivo apenas
+{
+
+    return new Promise((resolve, reject) => {
+
+        try{
+
+            const conteudo = fs.readFileSync(caminho, {encoding: 'utf-8'})
+
+            resolve(conteudo.toString())
+
+        }catch(e)
+        {
+            
+            reject(e)
+        }
+    })
+}
+function lerArquivos(caminhos) // recebemos um conjunto de caminhos, quando todos os arquivos forem lidos ele irá retornar um array com todos os conteúdos dos arquivos que foram lidos
+{
+
+    return Promise.all(caminhos.map(caminho => lerArquivo(caminho)))
+
+}
+
 function elementosTerminadosCom(array, padrao)
 {
 
@@ -38,6 +64,8 @@ module.exports =
 {
 
     lerDiretorio,
+    lerArquivo,
+    lerArquivos,
     elementosTerminadosCom
 
 } // Aqui estamos criando um atributo chamado lerDiretorio que aponta para a função ler diretório, o mesmo acontece com as demais funções. Esse método é conhecido como objetos literais.
