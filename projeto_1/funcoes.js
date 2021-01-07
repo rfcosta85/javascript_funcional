@@ -23,15 +23,21 @@ function lerDiretorio(caminho) // Responsável por ler um diretório
 
         }
 
-    } )
-
-    
+    } )  
 
 }
+
+function elementosTerminadosCom(array, padrao)
+{
+
+    return array.filter(el => el.endsWith(padrao))
+
+} // Essa função irá retornar um array com todos os arquivos que atendam a condição determinada em padrão
 
 module.exports = 
 {
 
-    lerDiretorio
+    lerDiretorio,
+    elementosTerminadosCom
 
-}
+} // Aqui estamos criando um atributo chamado lerDiretorio que aponta para a função ler diretório, o mesmo acontece com as demais funções. Esse método é conhecido como objetos literais.
