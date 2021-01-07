@@ -125,6 +125,20 @@ function separarTextoPor(simbolo)
     }
 }
 
+function agruparElementos(palavras)
+{
+    
+    return Object.values(palavras.reduce((acc, palavra) => {
+
+        const el = palavra.toLowerCase()
+        const qtde = acc[el] ? acc[el].qtde + 1 : 1
+        acc[el] = {elemento: el, qtde}
+
+        return acc
+
+    }, {}))
+}
+
 module.exports = 
 {
 
@@ -137,6 +151,7 @@ module.exports =
     removerElementosSeApenasNumero,
     removerSimbolos,
     MesclarElementos,
-    separarTextoPor
+    separarTextoPor,
+    agruparElementos
 
 } // Aqui estamos criando um atributo chamado lerDiretorio que aponta para a função ler diretório, o mesmo acontece com as demais funções. Esse método é conhecido como objetos literais.
