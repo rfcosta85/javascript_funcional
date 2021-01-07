@@ -74,6 +74,16 @@ function removerSeIncluir(array, padraoTextual)
 
 }
 
+function removerSeApenasNumero(array)
+{
+
+    return array.filter(el => {
+
+        const num = parseInt(el.trim())
+        return num !== num // Aqui teremos false quando o resultado de num for um not a number. Ou seja se n for um número
+    })
+}
+
 module.exports = 
 {
 
@@ -82,6 +92,7 @@ module.exports =
     lerArquivos,
     elementosTerminadosCom,
     removerSeVazio,
-    removerSeIncluir
+    removerSeIncluir,
+    removerSeApenasNumero
 
 } // Aqui estamos criando um atributo chamado lerDiretorio que aponta para a função ler diretório, o mesmo acontece com as demais funções. Esse método é conhecido como objetos literais.

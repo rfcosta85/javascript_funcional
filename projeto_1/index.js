@@ -13,4 +13,5 @@ fn.lerDiretorio(caminho)
     .then(todoConteudo => todoConteudo.split('\n')) // Aqui iremos gerar a quebra de linha
     .then(linhas => fn.removerSeVazio(linhas)) // Removendo os espaços vazios.
     .then(linhas => fn.removerSeIncluir(linhas, '-->'))
+    .then(linhas => fn.removerSeApenasNumero(linhas))
     .then(console.log)
