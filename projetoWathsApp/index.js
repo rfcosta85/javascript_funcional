@@ -1,24 +1,28 @@
 const path = require('path')
-const functions = require('./funcoes')
+const fn = require('./funcoes')
 
 const way = path.join(__dirname, '..','dados', 'talks')
 
 const symbols = [
 
-    '.', '?', '-',',','"','_','\r','[',']','(',')'    
+    '.', '?', '-',',','"','_','\r','[',']','(',')' , '=','\t', '{', '}', '+', ';'   
 
 ]
 
 
-functions.readDirectory(way)
-    .then(functions.elementsEndingWith('.txt'))
-    .then(functions.readFiles)
-    .then(functions.mergeElements)
-    //.then(functions.removeElementIfEmpty)
-    //.then(functions.removeElementsIfInclude('-'))
-    //.then(functions.removeElementsIfOnlyNumbers)
-    //.then(functions.removeSymbols(symbols))
-    .then(functions.separateTextBy(' '))
-    .then(functions.bunchElements)
-    .then(functions.orderElementsByNumericAttribute('amount', 'downward'))
+fn.readDirectory(way)
+    .then(fn.elementsEndingWith('.txt'))
+    .then(fn.readFiles)
+    .then(fn.mergeElements)
+    .then(fn.separateTextBy('\n'))
+    .then(fn.removeElementIfEmpty)
+    .then(fn.removeElementsIfInclude('-'))
+    .then(fn.removeElementsIfOnlyNumbers)
+    .then(fn.removeSymbols(symbols))
+    .then(fn.mergeElements)
+    .then(fn.separateTextBy(' '))
+    .then(fn.removeElementIfEmpty)    
+    .then(fn.removeElementsIfOnlyNumbers)
+    .then(fn.bunchElements)
+    .then(fn.orderElementsByNumericAttribute('amount', 'downward'))
     .then(console.log)

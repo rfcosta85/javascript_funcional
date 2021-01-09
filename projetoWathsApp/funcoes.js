@@ -11,7 +11,7 @@ function readDirectory(way)
 
             let files = fs.readdirSync(way)
 
-            files = files.map(files => path.join(way, files))
+            files = files.map(file => path.join(way, file))
 
             resolve(files)
         }catch(e){
@@ -59,14 +59,14 @@ function elementsEndingWith(textualPattern)
     }
 }
 
-/*function removeElementIfEmpty(array)
+function removeElementIfEmpty(array)
 {
 
     return array.filter(el => el.trim())
 
-}*/
+}
 
-/*function removeElementsIfInclude(textualPattern)
+function removeElementsIfInclude(textualPattern)
 {
 
     return function(array)
@@ -75,9 +75,9 @@ function elementsEndingWith(textualPattern)
         return array.filter(el => !el.includes(textualPattern))
 
     }
-}*/
+}
 
-/*function removeElementsIfOnlyNumbers(array)
+function removeElementsIfOnlyNumbers(array)
 {
 
     return array.filter(el => {
@@ -86,24 +86,20 @@ function elementsEndingWith(textualPattern)
         return number !== number
 
     })
-}*/
+}
 
-/*function removeSymbols(symbols)
-{
-
-    return function(array)
-    {
-
+function removeSymbols(symbols){
+    return function(array){
         return array.map(el => {
 
             return symbols.reduce((acc, symbol) => {
 
                 return acc.split(symbol).join('')
 
-            }, el)
+            },el)
         })
     }
-}*/
+}
 
 function mergeElements(array)
 {
@@ -128,7 +124,7 @@ function bunchElements(words)
 
     return Object.values(words.reduce((acc, words) => {
 
-        const el = words = words.toLowerCase()
+        const el = words.toLowerCase()
         const amount = acc[el] ? acc[el].amount + 1 : 1
         acc[el] = {Palavra: el, amount}
 
@@ -157,10 +153,10 @@ module.exports = {
     readFile,
     readFiles,
     elementsEndingWith,
-    //removeElementIfEmpty,    
-    //removeElementsIfInclude,
-    //removeElementsIfOnlyNumbers,
-    //removeSymbols,
+    removeElementIfEmpty,    
+    removeElementsIfInclude,
+    removeElementsIfOnlyNumbers,
+    removeSymbols,
     mergeElements,
     separateTextBy,
     bunchElements,
