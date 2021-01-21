@@ -28,6 +28,7 @@ function enfatizar(texto)
 
 }
 
+
 const resultado = composicao(
 
     gritar,
