@@ -1,0 +1,23 @@
+{
+  "name": "java_script_funcional_e_reativo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rfcosta85/javascript_funcional.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rfcosta85/javascript_funcional/issues"
+  },
+  "homepage": "https://github.com/rfcosta85/javascript_funcional#readme",
+  "dependencies": {
+    "rxjs": "^6.6.3"
+  }
+}
