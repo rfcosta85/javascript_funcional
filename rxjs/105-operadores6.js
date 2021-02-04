@@ -1,6 +1,6 @@
 const { from, Observable, Subscriber } = require('rxjs')
 
-function createPipeableOperator(nextFn)
+function createPipeableOperator(nextGenerator)
 {
 
     return function(source)
@@ -10,11 +10,8 @@ function createPipeableOperator(nextFn)
 
             source.subscribe({
 
-                next(v){
-
-                    nextFn(subscriber, v)
-                                      
-                }
+              next: nextGenerator(subscriber)
+              
             })
 
         })
@@ -26,12 +23,22 @@ function createPipeableOperator(nextFn)
 function primeiro()
 {
 
-    return createPipeableOperator((subscriber, v) => {
+    return createPipeableOperator(function(subscriber){
 
-        subscriber.next(v)
-        subscriber.complete()
+        return function(valor){
 
-    })
+            subscriber.next(valor)  
+            subscriber.complete()
+
+        }
+
+    })   
+
+    /*return createPipeableOperator((subscriber, v) => {
+
+              
+
+    })*/
     
 }
 
