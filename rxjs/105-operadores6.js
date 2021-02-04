@@ -1,6 +1,6 @@
 const { from, Observable, Subscriber } = require('rxjs')
 
-function createPipeableOperator(nextGenerator)
+function createPipeableOperator(operatorFn)
 {
 
     return function(source)
@@ -8,10 +8,14 @@ function createPipeableOperator(nextGenerator)
         
         return Observable.create(subscriber => {
 
+            const sub = operatorFn(subscriber)
+
             source.subscribe({
 
-              next: nextGenerator(subscriber)
-              
+                next: sub.next,
+                error: sub.error || (e => subscriber.error(e)),
+                complete: sub.complete || (() => subscriber.complete())
+
             })
 
         })
@@ -23,87 +27,65 @@ function createPipeableOperator(nextGenerator)
 function primeiro()
 {
 
-    return createPipeableOperator(function(subscriber){
+    return createPipeableOperator(subscriber =>({
 
-        return function(valor){
+            next(valor){
 
-            subscriber.next(valor)  
-            subscriber.complete()
+                subscriber.next(valor)  
+                subscriber.complete()
 
-        }
-
-    })   
-
-    /*return createPipeableOperator((subscriber, v) => {
-
-              
-
-    })*/
-    
+            }
+    }))  
+   
 }
 
 function nenhum()
-{
-
-    return function(source)
-    {
+{  
         
-        return Observable.create(subscriber => {
+    return createPipeableOperator(subscriber =>({
 
-            source.subscribe({
-
-                next(v){
-                   
-                    subscriber.complete()
-
-                }
-            })
-
-        })
+        next(valor){
             
-    }
-}
+            subscriber.complete()
 
+        }
+    }))  
+            
+    
+}
 
 function ultimo()
 {
+    
+    let ultimo 
 
-    return function(source)
-    {
+    return createPipeableOperator(subscriber =>({        
 
-        return Observable.create(subscriber => {
+        next(v){
 
-            let ultimo 
+            ultimo = v
+        },
 
-            source.subscribe({
+        complete(){
 
-                next(v){
+            if(ultimo !== undefined)
+            {
 
-                    ultimo = v
-                },
+                subscriber.next(ultimo)
 
-                complete(){
-
-                    if(ultimo !== undefined)
-                    {
-
-                        subscriber.next(ultimo)
-
-                    }
-                    
-                    subscriber.complete()
-                }
-            })
-        })
-    }
+            }
+            
+            subscriber.complete()
+        }
+    }))
+    
 }
-
 
 from([1, 2, 3, 4, 5])
     .pipe(
 
-        primeiro(),
+        //primeiro(),
         //nenhum(),
-        //ultimo()
+        ultimo()
     )    
     .subscribe(console.log)
