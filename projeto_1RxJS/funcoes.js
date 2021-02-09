@@ -3,24 +3,27 @@
 const fs = require('fs')
 const { resolve } = require('path')
 const path = require('path')
+const { Observable, Subscriber } = require('rxjs')
 
 function lerDiretorio(caminho) // Responsável por ler um diretório
 {
 
-    return new Promise((resolve,reject) => {
+    return new Observable( subscriber => {
 
         try{
 
 
-            let arquivos = fs.readdirSync(caminho) // lerá o arquivo de forma síncrona    
-            
-            arquivos = arquivos.map(arquivo => path.join(caminho, arquivo)) // Aqui iremos retornar o caminho   completo do nosso arquivo, pois em join temos a junção do arquivo mais o caminho
+            fs.readdirSync(caminho).forEach(arquivo => {
 
-            resolve(arquivos)
+                subscriber.next(path.join(caminho, arquivo)) 
+
+            }) 
+           
+            subscriber.complete()
 
         }catch(e){
 
-            reject(e)
+            subscriber.error(e)
 
         }
 
