@@ -31,29 +31,28 @@ function lerDiretorio(caminho) // Responsável por ler um diretório
 
 }
 
-function lerArquivo(caminho) // Assíncrona para ler um arquivo apenas
+function lerArquivo() // Assíncrona para ler um arquivo apenas
 {
 
-    return new Promise((resolve, reject) => {
+    return createPipeableOperator(subscriber => ({
 
-        try{
+        next(caminho){
 
-            const conteudo = fs.readFileSync(caminho, {encoding: 'utf-8'})
+            try{
 
-            resolve(conteudo.toString())
+                const conteudo = fs.readFileSync(caminho, {
+                    encoding: 'utf-8'})
+                subscriber.next(conteudo.toString())
+                subscriber.complete
 
-        }catch(e)
-        {
-            
-            reject(e)
+            }catch(e){
+
+                subscriber.error()
+
+            }
         }
-    })
-}
-function lerArquivos(caminhos) // recebemos um conjunto de caminhos, quando todos os arquivos forem lidos ele irá retornar um array com todos os conteúdos dos arquivos que foram lidos
-{
-
-    return Promise.all(caminhos.map(caminho => lerArquivo(caminho)))
-
+    })) 
+   
 }
 
 function elementosTerminadosCom(padraoTextual)
@@ -191,8 +190,7 @@ module.exports =
 {
 
     lerDiretorio,
-    lerArquivo,
-    lerArquivos,
+    lerArquivo,    
     elementosTerminadosCom,
     removerElementosSeVazio,
     removerElementosSeIncluir,
