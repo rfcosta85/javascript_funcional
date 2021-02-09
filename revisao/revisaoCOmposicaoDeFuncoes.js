@@ -56,21 +56,21 @@ function multiplicar(numeroBase)
 
 }
 
-const resultadoSoma = somar(2)(2, 2) 
-const resultadoMultiplicacao = multiplicar(1)(5, 2) 
-const somarResultados = resultadoSoma + resultadoMultiplicacao 
+const resultadoSoma = somar(2)(2, 2) // 6
+const resultadoMultiplicacao = multiplicar(1)(5, 2) // 10
+const somarResultados = resultadoSoma + resultadoMultiplicacao // 16
 
 function elevadoAoQuadrado(numero)
 {
 
-    return numero ** 2
+    return numero ** 2  // 256
 
 }
 
 function dividindoPorDois(numero)
 {
 
-    return numero / 2
+    return numero / 2 
 
 }
 
@@ -81,5 +81,5 @@ const resultado = composicao(
 
 )(somarResultados)
 
-console.log(resultado) 
+console.log(resultado) //128
 
