@@ -59,12 +59,19 @@ function lerArquivos(caminhos) // recebemos um conjunto de caminhos, quando todo
 function elementosTerminadosCom(padraoTextual)
 {
 
-    return function(array)
-    {
+    return createPipeableOperator(subscriber => ({
 
-        return array.filter(el => el.endsWith(padraoTextual))
+        next(texto){
 
-    }
+            if(texto.endsWith(padraoTextual))
+            {
+
+                subscriber.next(texto)
+
+            }
+
+        }
+    }))
     
 
 } // Essa função irá retornar um array com todos os arquivos que atendam a condição determinada em padrão
@@ -154,6 +161,30 @@ function ordernarPorAtributoNumerico(attr, ordem = 'asc')
         return array.sort(ordem ==='asc' ? asc : desc)
 
     }
+}
+
+function createPipeableOperator(operatorFn)
+{
+
+    return function(source)
+    {
+        
+        return Observable.create(subscriber => {
+
+            const sub = operatorFn(subscriber)
+
+            source.subscribe({
+
+                next: sub.next,
+                error: sub.error || (e => subscriber.error(e)),
+                complete: sub.complete || (() => subscriber.complete())
+
+            })
+
+        })
+            
+    }
+
 }
 
 module.exports = 
