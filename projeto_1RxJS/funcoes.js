@@ -123,15 +123,20 @@ function MesclarElementos(array) {
 
 }// Aqui juntamos todos os arquivos em uma única String
 
-function separarTextoPor(simbolo)
-{
+function separarTextoPor(simbolo){
 
-    return function(texto)
-    {
+    return createPipeableOperator(subscriber => ({
 
-        return texto.split(simbolo)
+        next(texto){
 
-    }
+            texto.split(simbolo).forEach(parte => {
+
+                subscriber.next(parte)
+            })
+
+            subscriber.complete()            
+        }
+    }))
 }
 
 function agruparElementos(palavras)
