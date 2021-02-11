@@ -7,7 +7,7 @@ const caminho = path.join(__dirname, '..', 'dados','legendas') // dirname nos in
 
 const simbolos = [
 
-    '.', '?', '-', ',', '"', '♪', '_', '<i>', '</i>', '\r', '[', ']', '(', ')'
+    '.', '?', '-', ',', '"', '♪', '_', '<i>', '</i>', '\r', '[', ']', '(', ')', '!'
 ]
 
 fn.lerDiretorio(caminho)
@@ -18,6 +18,10 @@ fn.lerDiretorio(caminho)
         fn.separarTextoPor('\n'),
         fn.removerElementosSeVazio(),
         fn.removerElementosSeIniciarComNumero(),
+        fn.removerSimbolos(simbolos),
+        fn.separarTextoPor(' '),
+        fn.removerElementosSeVazio(),
+        fn.removerElementosSeIniciarComNumero(),
         //first(),
         
     )
@@ -25,10 +29,10 @@ fn.lerDiretorio(caminho)
 
 /*f
     .then(fn.MesclarElementos)   
-    .then(fn.removerSimbolos(simbolos))
-    .then(fn.MesclarElementos) 
-    .then(fn.separarTextoPor(' '))
-    .then(fn.removerElementosSeVazio)
+    
+    
+    
+    
     .then(fn.removerElementosSeApenasNumero)    
     .then(fn.agruparElementos)
     .then(fn.ordernarPorAtributoNumerico('qtde', 'desc'))

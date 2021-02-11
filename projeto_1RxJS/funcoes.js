@@ -92,18 +92,6 @@ function removerElementosSeVazio(){
 
 }
 
-function removerElementosSeIncluir(padraoTextual)
-{
-
-    return function(array) // refatorando... agora somente se tivermos um array é que ele fará o processamento para pegar o valor textual
-    {
-
-        return array.filter(el => !el.includes(padraoTextual)) // Se não incluir o padrão textual, manter o elemento no array final, caso contrário remova
-
-    }
-    
-}
-
 function removerElementosSeIniciarComNumero()
 {
 
@@ -124,18 +112,19 @@ function removerElementosSeIniciarComNumero()
 
 }
 
+
 function removerSimbolos(simbolos){
-    return function(array){
-        return array.map(el => {
-
-            return simbolos.reduce((acc, simbolo) => {
-
-                return acc.split(simbolo).join('')
-
-            },el )             
-        })
-    }
-} // Aqui nós pegamos cada símbolo excluímos e juntamos com o array resultante um espaço em branco
+    return createPipeableOperator(subscriber =>({
+        next(texto) {
+            const textoSemSimbolos = simbolos.reduce(
+                (acc, simbolo) => {
+                    return acc.split(simbolo).join('')
+                }
+                , texto)
+            subscriber.next(textoSemSimbolos)
+        }
+    }))
+} 
 
 function MesclarElementos(array) {
 
@@ -153,8 +142,7 @@ function separarTextoPor(simbolo){
 
                 subscriber.next(parte)
             })
-
-            subscriber.complete()            
+                                  
         }
     }))
 }
@@ -217,8 +205,7 @@ module.exports =
     lerDiretorio,
     lerArquivo,    
     elementosTerminadosCom,
-    removerElementosSeVazio,
-    removerElementosSeIncluir,
+    removerElementosSeVazio,    
     removerElementosSeIniciarComNumero,
     removerSimbolos,
     MesclarElementos,
