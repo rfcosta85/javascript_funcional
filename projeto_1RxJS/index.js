@@ -17,15 +17,14 @@ fn.lerDiretorio(caminho)
         fn.lerArquivo(),
         fn.separarTextoPor('\n'),
         fn.removerElementosSeVazio(),
+        fn.removerElementosSeIniciarComNumero(),
         //first(),
         
     )
     .subscribe(console.log)
 
 /*f
-    .then(fn.MesclarElementos)     
-    .then(fn.removerElementosSeIncluir('-->'))
-    .then(fn.removerElementosSeApenasNumero)
+    .then(fn.MesclarElementos)   
     .then(fn.removerSimbolos(simbolos))
     .then(fn.MesclarElementos) 
     .then(fn.separarTextoPor(' '))

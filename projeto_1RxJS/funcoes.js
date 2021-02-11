@@ -104,14 +104,24 @@ function removerElementosSeIncluir(padraoTextual)
     
 }
 
-function removerElementosSeApenasNumero(array)
+function removerElementosSeIniciarComNumero()
 {
 
-    return array.filter(el => {
+    return createPipeableOperator(subscriber => ({
 
-        const num = parseInt(el.trim())
-        return num !== num // Aqui teremos false quando o resultado de num for um not a number. Ou seja se n for um número
-    })
+        next(texto){
+
+            const num = parseInt(texto.trim())      
+
+            if(num !== num)
+            {
+
+                subscriber.next(texto)
+
+            }                      
+        }
+    }))
+
 }
 
 function removerSimbolos(simbolos){
@@ -209,7 +219,7 @@ module.exports =
     elementosTerminadosCom,
     removerElementosSeVazio,
     removerElementosSeIncluir,
-    removerElementosSeApenasNumero,
+    removerElementosSeIniciarComNumero,
     removerSimbolos,
     MesclarElementos,
     separarTextoPor,
