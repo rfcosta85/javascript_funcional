@@ -16,17 +16,14 @@ fn.lerDiretorio(caminho)
         fn.elementosTerminadosCom('.srt'),
         fn.lerArquivo(),
         fn.separarTextoPor('\n'),
+        fn.removerElementosSeVazio(),
         //first(),
         
     )
     .subscribe(console.log)
 
-/*fn.lerDiretorio(caminho)
-    .then(fn.elementosTerminadosCom('.srt'))
-    .then(fn.lerArquivos)
-    .then(fn.MesclarElementos) 
-    .then(fn.separarTextoPor('\n'))
-    .then(fn.removerElementosSeVazio) // Removendo os espaços vazios.
+/*f
+    .then(fn.MesclarElementos)     
     .then(fn.removerElementosSeIncluir('-->'))
     .then(fn.removerElementosSeApenasNumero)
     .then(fn.removerSimbolos(simbolos))

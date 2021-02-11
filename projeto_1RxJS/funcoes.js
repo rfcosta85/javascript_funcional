@@ -75,11 +75,21 @@ function elementosTerminadosCom(padraoTextual)
 
 } // Essa função irá retornar um array com todos os arquivos que atendam a condição determinada em padrão
 
-function removerElementosSeVazio(array)
-{
+function removerElementosSeVazio(){
 
-    return array.filter(el => el.trim()) // O método trim vai retirar os espaços em branco
-    
+    return createPipeableOperator(subscriber => ({
+
+        next(texto){
+
+            if(texto.trim())
+            {
+
+                subscriber.next(texto)
+
+            }                      
+        }
+    }))
+
 }
 
 function removerElementosSeIncluir(padraoTextual)
