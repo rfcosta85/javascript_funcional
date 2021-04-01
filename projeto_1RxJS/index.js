@@ -2,7 +2,7 @@
 
 const path = require('path')
 const fn = require('./funcoes')
-const { first } = require('rxjs/operators')
+const { first, toArray } = require('rxjs/operators')
 const caminho = path.join(__dirname, '..', 'dados','legendas') // dirname nos informa a pasta atual, ... para sairmos desse diretorio, legendas para entrarmos na pasta legendas
 
 const simbolos = [
@@ -22,7 +22,8 @@ fn.lerDiretorio(caminho)
         fn.separarTextoPor(' '),
         fn.removerElementosSeVazio(),
         fn.removerElementosSeIniciarComNumero(),
-        //first(),
+        toArray(),
+        fn.agruparElementos()
         
     )
     .subscribe(console.log)
