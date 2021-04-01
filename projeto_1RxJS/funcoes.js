@@ -42,8 +42,7 @@ function lerArquivo() // Assíncrona para ler um arquivo apenas
 
                 const conteudo = fs.readFileSync(caminho, {
                     encoding: 'utf-8'})
-                subscriber.next(conteudo.toString())
-                subscriber.complete
+                subscriber.next(conteudo.toString())              
 
             }catch(e){
 
@@ -125,12 +124,6 @@ function removerSimbolos(simbolos){
         }
     }))
 } 
-
-function MesclarElementos(array) {
-
-    return array.join(' ')
-
-}// Aqui juntamos todos os arquivos em uma única String
 
 function separarTextoPor(simbolo){
 
@@ -216,8 +209,7 @@ module.exports =
     elementosTerminadosCom,
     removerElementosSeVazio,    
     removerElementosSeIniciarComNumero,
-    removerSimbolos,
-    MesclarElementos,
+    removerSimbolos,   
     separarTextoPor,
     agruparElementos,
     ordernarPorAtributoNumerico

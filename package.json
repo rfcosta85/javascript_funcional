@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/rfcosta85/javascript_funcional#readme",
   "dependencies": {
+    "lodash": "^4.17.21",
     "rxjs": "^6.6.3",
     "xmlhttprequest": "^1.8.0"
   }
